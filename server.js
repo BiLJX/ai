@@ -3,7 +3,7 @@ import cors from "cors"
 import bodyParser from "body-parser"
 import NeuralNetwork from "./test/brain.js"
 const brain = new NeuralNetwork(100, 66, 1)
-
+let result = "200"
 const app = express();
 app.use(cors())
 app.use(bodyParser.urlencoded({extended : true}));
@@ -41,16 +41,19 @@ function getResult(data_arr){
 }
 
 app.get("/result", (req, res)=>{
-    let result = "200"
-    setInterval(()=>{
-        res.send({
-            "value": result
-        })
-    }, 1000)
-    result = getResult(data)
+    
+    res.send({
+        "status": result,
+        "response": "ok"
+    })
+    setTimeout(()=>{
+        result = getResult(data)
+    }, 5000)
 })
 
-
+app.get("/output", (req, res)=>{
+    res.send(result)
+})
 
 
 
