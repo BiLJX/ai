@@ -42,7 +42,7 @@ function getResult(data_arr){
 
 app.get("/result", (req, res)=>{
     let result = "200"
-    setTimeout(()=>{
+    setInterval(()=>{
         res.send({
             "value": result
         })
