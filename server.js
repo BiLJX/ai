@@ -24,7 +24,7 @@ app.post("/submit", (req, res)=>{
     })
 })
 
-function getResult(data_arr){
+async function getResult(data_arr){
     const pred =  [15, 39, 83, 149, 174, 168, 136, 73, 138, 160, 153, 136, 144, 140, 120, 76, 43, 87, 114, 115, 91, 82, 102, 111, 98, 80, 84, 100, 106, 93, 49, 5, 21, 43, 85, 112, 110, 82, 66, 57, 40, 16, 20, 43, 62, 66, 78, 92, 82, 47, 15, 38, 75, 83, 66, 38, 26, 26, 35, 46, 34, 10, 3, 8, 5, 41, 60, 55, 32, 39, 54, 58, 43, 39, 39, 45, 45, 55, 94, 106, 93, 65, 64, 66, 40, 6, 0, 18, 30, 29, 28, 17, 26, 55, 55, 31, 0, 0, 0, 0]
     for(let j = 0; j < 10000; j++){
         for(let i = 0; i<data_arr.length; i++){
@@ -41,11 +41,14 @@ function getResult(data_arr){
 }
 
 app.get("/result", (req, res)=>{
-    const result = getResult(data)
-    console.log(result)
-    res.send({
-        "value": result
-    })
+    async function get(){
+        const result = await getResult(data)
+        console.log(result)
+        res.send({
+            "value": result
+        })
+    }
+    get()
 })
 
 
