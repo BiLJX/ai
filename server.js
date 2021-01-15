@@ -46,7 +46,7 @@ app.get("/result", (req, res)=>{
         res.send({
             "value": result
         })
-    }, 2000)
+    }, 1000)
     result = getResult(data)
 })
 
